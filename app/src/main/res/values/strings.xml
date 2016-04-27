@@ -7,12 +7,14 @@
     <string name="action_about">About</string>
 
 
-
     <!-- drawer titles -->
     <string name="new_pin">New Pin</string>
     <string name="load_pins">Load Pins</string>
     <string name="reset_master_password">Reset Master Password</string>
     <string name="share_pins">Share Pins</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
