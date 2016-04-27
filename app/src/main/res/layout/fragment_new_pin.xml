@@ -6,6 +6,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        style="@style/labels"
         android:id="@+id/name_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
