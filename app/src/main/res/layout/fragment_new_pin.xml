@@ -62,13 +62,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_alignParentRight="true"
+    <LinearLayout
         android:layout_below="@id/notes_value"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foregroundGravity="bottom|right"
-        android:background="@drawable/ic_new_pin"/>
+        android:weightSum="2">
+
+        <Button
+            style="@style/custom_buttons"
+            android:id="@+id/save"
+            android:text="@string/save_pin"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/custom_buttons"
+            android:id="@+id/discard"
+            android:text="@string/discard_pin"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
 

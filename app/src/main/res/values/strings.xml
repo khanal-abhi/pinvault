@@ -21,5 +21,8 @@
     <string name="password_label">Password:</string>
     <string name="notes_label">Notes:</string>
 
+    <string name="save_pin">Save</string>
+    <string name="discard_pin">Discard</string>
+
 
 </resources>
