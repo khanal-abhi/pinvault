@@ -47,4 +47,24 @@ public class PinHelper extends SQLiteOpenHelper {
         Integer[] boundArgs = {_id};
         db.execSQL("DELETE * FROM " + PinContract.TABLE_NAME + " WHERE " + PinContract.ID_COLUMN + "=?;", boundArgs);
     }
+
+    public void getPin(int _id) throws SQLException{
+        SQLiteDatabase db = getReadableDatabase();
+        String[] args = {
+          PinContract.ID_COLUMN + "+" + _id
+        };
+        Cursor cursor = db.query(
+                PinContract.TABLE_NAME,
+                PinContract.selection,
+                null,
+                args,
+                null,
+                null,
+                null
+        );
+
+        if(cursor.moveToFirst()){
+
+        }
+    }
 }

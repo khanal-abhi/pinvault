@@ -21,4 +21,11 @@ public class PinContract {
 
     public static String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
+    public static String[] selection = {
+            ID_COLUMN,
+            LABEL_COLUMN,
+            PIN_COLUMN,
+            NOTES_COLUMN
+    };
+
 }
