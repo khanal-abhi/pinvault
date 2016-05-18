@@ -103,4 +103,13 @@ public class PinHelper extends SQLiteOpenHelper {
         }
         return null;
     }
+
+    public void removeAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(
+                PinContract.TABLE_NAME,
+                "1",
+                null
+        );
+    }
 }

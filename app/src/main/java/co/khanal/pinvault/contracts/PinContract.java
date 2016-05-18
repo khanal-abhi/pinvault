@@ -11,6 +11,7 @@ public class PinContract {
     public static String LABEL_COLUMN = "label";
     public static String PIN_COLUMN = "pin";
     public static String NOTES_COLUMN = "notes";
+    public static int DB_VERSION = 1;
 
     public static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
             ID_COLUMN + " INTEGER PRIMARY AUTOINCREMENT," +
