@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import co.khanal.pinvault.contracts.PinContract;
 import co.khanal.pinvault.pojos.Pin;
@@ -66,5 +67,23 @@ public class PinHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
 
         }
+    }
+
+    public List<Pin> getPins() throws SQLException{
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                PinContract.TABLE_NAME,
+                PinContract.selection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        if(cursor.moveToFirst()){
+
+        }
+        return null;
     }
 }
