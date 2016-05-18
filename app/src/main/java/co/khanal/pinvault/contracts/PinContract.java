@@ -14,7 +14,7 @@ public class PinContract {
     public static int DB_VERSION = 1;
 
     public static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
-            ID_COLUMN + " INTEGER PRIMARY AUTOINCREMENT," +
+            ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             LABEL_COLUMN + " TEXT," +
             PIN_COLUMN + " TEXT," +
             NOTES_COLUMN + " TEXT " +

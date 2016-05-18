@@ -58,7 +58,7 @@ public class PinHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(
                 PinContract.TABLE_NAME,
                 PinContract.selection,
-                null,
+                PinContract.ID_COLUMN + "=?",
                 args,
                 null,
                 null,
@@ -86,9 +86,10 @@ public class PinHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
+        List<Pin> pins = new ArrayList<Pin>();
 
         if(cursor.moveToFirst()){
-            List<Pin> pins = new ArrayList<Pin>();
+
             do {
                 Pin pin = new Pin(
                         cursor.getInt(0),
@@ -98,10 +99,8 @@ public class PinHelper extends SQLiteOpenHelper {
                 );
                 pins.add(pin);
             } while (cursor.moveToNext());
-
-            return pins;
         }
-        return null;
+        return pins;
     }
 
     public void removeAll() {
