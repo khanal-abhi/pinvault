@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import co.khanal.pinvault.contracts.PinContract;
@@ -87,7 +88,18 @@ public class PinHelper extends SQLiteOpenHelper {
         );
 
         if(cursor.moveToFirst()){
+            List<Pin> pins = new ArrayList<Pin>();
+            do {
+                Pin pin = new Pin(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3)
+                );
+                pins.add(pin);
+            } while (cursor.moveToNext());
 
+            return pins;
         }
         return null;
     }
