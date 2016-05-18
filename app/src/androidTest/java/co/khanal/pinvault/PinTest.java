@@ -1,7 +1,5 @@
 package co.khanal.pinvault;
 
-import android.content.Context;
-
 import junit.framework.TestCase;
 
 /**
@@ -9,17 +7,6 @@ import junit.framework.TestCase;
  */
 public class PinTest extends TestCase {
 
-    Context mContext;
-
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-    }
-
-    @Override
-    public void tearDown() throws Exception {
-        super.tearDown();
-    }
 
 
 }
