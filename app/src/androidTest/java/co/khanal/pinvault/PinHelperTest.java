@@ -19,7 +19,7 @@ public class PinHelperTest extends AndroidTestCase {
     PinHelper mPinHelper;
     Pin pin1, pin2, pin3;
 
-    int _id;
+    long _id;
 
     @Override
     public void setUp() throws Exception {

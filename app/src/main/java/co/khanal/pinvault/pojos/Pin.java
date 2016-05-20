@@ -5,7 +5,7 @@ package co.khanal.pinvault.pojos;
  */
 public class Pin {
 
-    private int _id;
+    private long _id;
     private String label;
     private String pin;
     private String notes;
@@ -26,11 +26,11 @@ public class Pin {
     public Pin() {
     }
 
-    public int get_id() {
+    public long get_id() {
         return _id;
     }
 
-    public void set_id(int _id) {
+    public void set_id(long _id) {
         this._id = _id;
     }
 
