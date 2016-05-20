@@ -69,6 +69,54 @@ public class PinHelperTest extends AndroidTestCase {
         }
     }
 
+    public void testCanGetPins() throws Exception {
+        try {
+            mPinHelper.insertPin(pin1);
+            mPinHelper.insertPin(pin2);
+            mPinHelper.insertPin(pin3);
+
+            List<Pin> pins = mPinHelper.getPins();
+
+            assertTrue(pins.contains(pin1));
+            assertTrue(pins.contains(pin2));
+            assertTrue(pins.contains(pin3));
+        } catch (Exception e){
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    public void testCanRemovePin() throws Exception {
+        try {
+            _id = mPinHelper.insertPin(pin1);
+            mPinHelper.removePin(_id);
+            Pin pin = mPinHelper.getPin(_id);
+            assertNull(pin);
+        } catch (Exception e) {
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    public void testCanRemoveAll() throws Exception{
+        try {
+            mPinHelper.insertPin(pin1);
+            mPinHelper.insertPin(pin2);
+            mPinHelper.insertPin(pin3);
+
+            List<Pin> pins = mPinHelper.getPins();
+
+            assertTrue(pins.contains(pin1));
+            assertTrue(pins.contains(pin2));
+            assertTrue(pins.contains(pin3));
+
+            mPinHelper.removeAll();
+            pins = mPinHelper.getPins();
+            assertEquals(0, pins.size());
+
+        } catch (Exception e){
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
 
 
 

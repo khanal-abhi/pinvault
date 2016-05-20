@@ -47,8 +47,14 @@ public class PinHelper extends SQLiteOpenHelper {
 
     public void removePin(long _id) throws SQLException{
         SQLiteDatabase db = getWritableDatabase();
-        Long[] boundArgs = {_id};
-        db.execSQL("DELETE * FROM " + PinContract.TABLE_NAME + " WHERE " + PinContract.ID_COLUMN + "=?;", boundArgs);
+        String[] args = {
+                String.valueOf(_id)
+        };
+        db.delete(
+                PinContract.TABLE_NAME,
+                PinContract.ID_COLUMN + "=?",
+                args
+        );
     }
 
     public Pin getPin(long _id) throws SQLException{
@@ -75,7 +81,7 @@ public class PinHelper extends SQLiteOpenHelper {
 
             return returnPin;
         }
-        throw new SQLException("Could not find any pin with id= " + _id);
+        return null;
     }
 
     public List<Pin> getPins() throws SQLException{
