@@ -57,4 +57,25 @@ public class Pin {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pin)) return false;
+
+        Pin pin1 = (Pin) o;
+
+        if (!getLabel().equals(pin1.getLabel())) return false;
+        if (!getPin().equals(pin1.getPin())) return false;
+        return !(getNotes() != null ? !getNotes().equals(pin1.getNotes()) : pin1.getNotes() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getLabel().hashCode();
+        result = 31 * result + getPin().hashCode();
+        result = 31 * result + (getNotes() != null ? getNotes().hashCode() : 0);
+        return result;
+    }
 }

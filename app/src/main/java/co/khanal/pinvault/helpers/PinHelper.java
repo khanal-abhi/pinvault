@@ -54,7 +54,7 @@ public class PinHelper extends SQLiteOpenHelper {
     public Pin getPin(long _id) throws SQLException{
         SQLiteDatabase db = getReadableDatabase();
         String[] args = {
-          PinContract.ID_COLUMN + "+" + _id
+          String.valueOf(_id)
         };
         Cursor cursor = db.query(
                 PinContract.TABLE_NAME,
@@ -72,6 +72,8 @@ public class PinHelper extends SQLiteOpenHelper {
             returnPin.setLabel(cursor.getString(1));
             returnPin.setPin(cursor.getString(2));
             returnPin.setNotes(cursor.getString(3));
+
+            return returnPin;
         }
         throw new SQLException("Could not find any pin with id= " + _id);
     }
