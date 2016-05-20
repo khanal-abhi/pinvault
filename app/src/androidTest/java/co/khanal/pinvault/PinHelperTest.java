@@ -81,7 +81,8 @@ public class PinHelperTest extends AndroidTestCase {
 
 
         } catch (SQLException e){
-            assertTrue("Faced an exception trying to remove pin", false);
+
+            assertTrue(e.getMessage(), false);
         }
     }
 
