@@ -52,11 +52,8 @@ public class PinHelperTest extends AndroidTestCase {
 
     public void testCanAddPin() throws Exception {
         try {
-            mPinHelper.insertPin(pin1);
-            List<Pin> pins = mPinHelper.getPins();
-            assertEquals(1, pins.size());
-            _id = pins.get(0).get_id();
-
+            _id = mPinHelper.insertPin(pin1);
+            assertNotSame("Should not be 0", 0, _id);
         } catch (SQLException e){
             assertTrue("faced an exception trying to add the pin.", false);
         }
