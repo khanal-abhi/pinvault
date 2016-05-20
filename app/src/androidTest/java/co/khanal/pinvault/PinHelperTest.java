@@ -88,7 +88,7 @@ public class PinHelperTest extends AndroidTestCase {
     public void testCanRemovePin() throws Exception {
         try {
             _id = mPinHelper.insertPin(pin1);
-            mPinHelper.removePin(_id);
+            assertTrue(mPinHelper.removePin(_id));
             Pin pin = mPinHelper.getPin(_id);
             assertNull(pin);
         } catch (Exception e) {
@@ -108,7 +108,7 @@ public class PinHelperTest extends AndroidTestCase {
             assertTrue(pins.contains(pin2));
             assertTrue(pins.contains(pin3));
 
-            mPinHelper.removeAll();
+            assertTrue(mPinHelper.removeAll());
             pins = mPinHelper.getPins();
             assertEquals(0, pins.size());
 

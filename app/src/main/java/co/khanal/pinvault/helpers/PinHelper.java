@@ -45,16 +45,22 @@ public class PinHelper extends SQLiteOpenHelper {
 
     }
 
-    public void removePin(long _id) throws SQLException{
+    public boolean removePin(long _id) throws SQLException{
         SQLiteDatabase db = getWritableDatabase();
         String[] args = {
                 String.valueOf(_id)
         };
-        db.delete(
+        int res = db.delete(
                 PinContract.TABLE_NAME,
                 PinContract.ID_COLUMN + "=?",
                 args
         );
+
+        if(res != 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Pin getPin(long _id) throws SQLException{
@@ -112,13 +118,19 @@ public class PinHelper extends SQLiteOpenHelper {
         return pins;
     }
 
-    public void removeAll() {
+    public boolean removeAll() {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(
+        int res = db.delete(
                 PinContract.TABLE_NAME,
                 "1",
                 null
         );
+
+        if(res != 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public long updatePin(Pin pin) throws Exception {
