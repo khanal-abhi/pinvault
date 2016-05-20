@@ -120,4 +120,27 @@ public class PinHelper extends SQLiteOpenHelper {
                 null
         );
     }
+
+    public long updatePin(Pin pin) throws Exception {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("label", pin.getLabel());
+        values.put("pin", pin.getPin());
+        values.put("notes", pin.getNotes());
+
+        String[] args = {
+          String.valueOf(pin.get_id())
+        };
+
+        int res = db.update(
+                PinContract.TABLE_NAME,
+                values,
+                PinContract.ID_COLUMN + "=?",
+                args
+        );
+
+        if(res > 0)
+            return pin.get_id();
+        else return res;
+    }
 }
