@@ -3,12 +3,22 @@ package co.khanal.pinvault;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import co.khanal.pinvault.contracts.PinContract;
+import co.khanal.pinvault.helpers.PinHelper;
 
 
 /**
@@ -24,6 +34,23 @@ public class NewPin extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @InjectView(R.id.name_value)
+    EditText pinName;
+
+    @InjectView(R.id.password_value)
+    EditText pinPassword;
+
+    @InjectView(R.id.notes_value)
+    EditText pinNotes;
+
+    @InjectView(R.id.save)
+    Button save;
+
+    @InjectView(R.id.discard)
+    Button discard;
+
+    PinHelper mPinHelper;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,13 +89,29 @@ public class NewPin extends Fragment {
         }
 
         // setHasOptionsMenu(true);
+
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_pin, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_new_pin, container, false);
+        ButterKnife.inject(this, view);
+
+        mPinHelper = new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "saved", Toast.LENGTH_SHORT);
+            }
+        });
+
+        return view;
     }
 
 //    @Override
