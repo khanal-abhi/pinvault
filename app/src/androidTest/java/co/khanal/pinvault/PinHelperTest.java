@@ -59,10 +59,27 @@ public class PinHelperTest extends AndroidTestCase {
         }
     }
 
-    public void testCanRemovePin() throws Exception {
+    public void testCanGetAndRemovePin() throws Exception {
         try {
+            // insert the pin
             _id = mPinHelper.insertPin(pin2);
             assertNotSame("Should not be 0", 0, _id);
+
+            // get the pin
+            Pin pin = mPinHelper.getPin(_id);
+            assertNotNull(pin);
+            assertEquals(pin2, pin);
+
+            // remove the pin
+            mPinHelper.removePin(_id);
+
+            // get all the pins
+            List<Pin> pins = mPinHelper.getPins();
+
+            // verify it is empty
+            assertEquals(0, pins.size());
+
+
         } catch (SQLException e){
             assertTrue("Faced an exception trying to remove pin", false);
         }
