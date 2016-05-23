@@ -22,3 +22,5 @@ The following public methods are exposed from the Pin Helper Class:
 3. List<Pins> getPins(void)
 4. boolean removePin(long _id)
 5. boolean removeAll(void)
+
+#### Screenshots:
