@@ -24,3 +24,5 @@ The following public methods are exposed from the Pin Helper Class:
 5. boolean removeAll(void)
 
 #### Screenshots:
+<img src="img/screenshot1.png" width="200" />
+<img src="img/screenshot2.png" width="200" />
