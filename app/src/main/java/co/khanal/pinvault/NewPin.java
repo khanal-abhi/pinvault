@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.khanal.pinvault.contracts.PinContract;
 import co.khanal.pinvault.helpers.PinHelper;
+import co.khanal.pinvault.pojos.Pin;
 
 
 /**
@@ -35,19 +36,10 @@ public class NewPin extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    @InjectView(R.id.name_value)
     EditText pinName;
-
-    @InjectView(R.id.password_value)
     EditText pinPassword;
-
-    @InjectView(R.id.notes_value)
     EditText pinNotes;
-
-    @InjectView(R.id.save)
     Button save;
-
-    @InjectView(R.id.discard)
     Button discard;
 
     PinHelper mPinHelper;
@@ -104,10 +96,41 @@ public class NewPin extends Fragment {
 
         mPinHelper = new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
 
+        pinName = (EditText)view.findViewById(R.id.name_value);
+        pinPassword = (EditText)view.findViewById(R.id.password_value);
+        pinNotes = (EditText)view.findViewById(R.id.notes_value);
+
+        save = (Button)view.findViewById(R.id.save);
+        discard = (Button)view.findViewById(R.id.discard);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "saved", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "Saving now", Toast.LENGTH_SHORT).show();
+
+                if(pinName != null){
+                    if(pinPassword != null){
+                        if(pinNotes != null){
+                            if(!pinName.getText().toString().isEmpty() && !pinPassword.getText().toString().isEmpty()){
+                                Pin pin = new Pin(pinName.getText().toString(), pinPassword.getText().toString(), pinNotes.getText().toString());
+                                Toast.makeText(getContext(), "Pin saved.", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getContext(), "Name or Pin field empty. Cannot save.", Toast.LENGTH_SHORT).show();
+                            }
+                            return;
+                        }
+                    }
+                }
+                Toast.makeText(getContext(), "Error saving the pin!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
+
+        discard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Discarding now", Toast.LENGTH_SHORT).show();
             }
         });
 
