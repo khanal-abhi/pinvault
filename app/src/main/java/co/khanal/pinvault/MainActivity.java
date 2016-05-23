@@ -14,9 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NewPin.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NewPin.OnFragmentInteractionListener, LoadPinsFragment.OnFragmentInteractionListener{
 
     public final static String NEW_PIN = "new_pin";
 
@@ -85,7 +86,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.new_pin) {
             // Handle the camera action
         } else if (id == R.id.load_pins) {
-
+            Toast.makeText(getApplicationContext(), "Loading the pins...", Toast.LENGTH_SHORT).show();
+            LoadPinsFragment loadPinsFragment = new LoadPinsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_container, loadPinsFragment)
+                    .commit();
         } else if (id == R.id.reset_master_password) {
 
         } else if (id == R.id.share_pins) {

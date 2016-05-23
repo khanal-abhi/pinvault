@@ -3,46 +3,25 @@ package co.khanal.pinvault;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import co.khanal.pinvault.contracts.PinContract;
-import co.khanal.pinvault.helpers.PinHelper;
-import co.khanal.pinvault.pojos.Pin;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link NewPin.OnFragmentInteractionListener} interface
+ * {@link LoadPinsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link NewPin#newInstance} factory method to
+ * Use the {@link LoadPinsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewPin extends Fragment {
+public class LoadPinsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    EditText pinName;
-    EditText pinPassword;
-    EditText pinNotes;
-    Button save;
-    Button discard;
-
-    PinHelper mPinHelper;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -50,7 +29,7 @@ public class NewPin extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public NewPin() {
+    public LoadPinsFragment() {
         // Required empty public constructor
     }
 
@@ -60,11 +39,11 @@ public class NewPin extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NewPin.
+     * @return A new instance of fragment LoadPinsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NewPin newInstance(String param1, String param2) {
-        NewPin fragment = new NewPin();
+    public static LoadPinsFragment newInstance(String param1, String param2) {
+        LoadPinsFragment fragment = new LoadPinsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,68 +58,14 @@ public class NewPin extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        // setHasOptionsMenu(true);
-
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View view =  inflater.inflate(R.layout.fragment_new_pin, container, false);
-
-        mPinHelper = new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
-
-        pinName = (EditText)view.findViewById(R.id.name_value);
-        pinPassword = (EditText)view.findViewById(R.id.password_value);
-        pinNotes = (EditText)view.findViewById(R.id.notes_value);
-
-        save = (Button)view.findViewById(R.id.save);
-        discard = (Button)view.findViewById(R.id.discard);
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Saving now", Toast.LENGTH_SHORT).show();
-
-                if(pinName != null){
-                    if(pinPassword != null){
-                        if(pinNotes != null){
-                            if(!pinName.getText().toString().isEmpty() && !pinPassword.getText().toString().isEmpty()){
-                                Pin pin = new Pin(pinName.getText().toString(), pinPassword.getText().toString(), pinNotes.getText().toString());
-                                Toast.makeText(getContext(), "Pin saved.", Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                Toast.makeText(getContext(), "Name or Pin field empty. Cannot save.", Toast.LENGTH_SHORT).show();
-                            }
-                            return;
-                        }
-                    }
-                }
-                Toast.makeText(getContext(), "Error saving the pin!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        });
-
-        discard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Discarding now", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        final View view = inflater.inflate(R.layout.fragment_pin_list, container, false);
         return view;
     }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.new_pin_menu, menu);
-//    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -171,7 +96,7 @@ public class NewPin extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
