@@ -23,6 +23,9 @@ The following public methods are exposed from the Pin Helper Class:
 4. boolean removePin(long _id)
 5. boolean removeAll(void)
 
+### Views:
+1. New Pin: Used to add a new pin. Already implemented. Will let a user add a pin provided the label and the pin have been set at the very least. The note is optional. There will be an option to discard the pin if the pin doesn't need to be saved.
+
 #### Screenshots:
 <img src="img/screenshot1.png" width="200" />
 <img src="img/screenshot2.png" width="200" />
