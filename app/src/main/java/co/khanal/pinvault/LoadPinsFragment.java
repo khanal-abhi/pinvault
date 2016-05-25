@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class LoadPinsFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_pin_list, container, false);
         try {
+            Log.d(getClass().getSimpleName(), "Pins: " + mPinHelper.getPins().size());
             pinRecyclerView = (RecyclerView)view.findViewById(R.id.list);
             pinRecyclerView.setAdapter(new PinRecyclerView(mPinHelper.getPins(), R.layout.fragment_pin));
             pinRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

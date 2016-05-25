@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.khanal.pinvault.contracts.PinContract;
@@ -112,6 +114,11 @@ public class NewPin extends Fragment {
                         if(pinNotes != null){
                             if(!pinName.getText().toString().isEmpty() && !pinPassword.getText().toString().isEmpty()){
                                 Pin pin = new Pin(pinName.getText().toString(), pinPassword.getText().toString(), pinNotes.getText().toString());
+                                try {
+                                    mPinHelper.insertPin(pin);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
                                 Toast.makeText(getContext(), "Pin saved.", Toast.LENGTH_SHORT).show();
 
                             } else {

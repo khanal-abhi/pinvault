@@ -32,9 +32,13 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Pin pin = pins.get(position);
-        holder.label.setText(pin.getLabel());
-        holder.password.setText(pin.getPin());
-        holder.itemView.setTag(pin);
+        if(holder != null){
+            holder.label.setText(pin.getLabel());
+            holder.password.setText(pin.getPin());
+            holder.itemView.setTag(pin);
+        } else {
+            new NullPointerException("holder is null?");
+        }
     }
 
     @Override
@@ -49,8 +53,8 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            label = (TextView)itemView.findViewById(R.id.name_value);
-            password = (TextView)itemView.findViewById(R.id.password_value);
+            label = (TextView)itemView.findViewById(R.id.label);
+            password = (TextView)itemView.findViewById(R.id.password);
         }
     }
 }
