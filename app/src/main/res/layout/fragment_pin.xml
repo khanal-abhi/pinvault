@@ -15,6 +15,7 @@
 
     <TextView
         android:id="@+id/password"
+        android:textColor="#555555"
         android:text="@string/password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
