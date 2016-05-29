@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        NewPin newPin = new NewPin();
+        LoadPinsFragment loadPinsFragment = new LoadPinsFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.frag_container, newPin, NEW_PIN)
+                .add(R.id.frag_container, loadPinsFragment, NEW_PIN)
                 .commit();
     }
 
@@ -85,8 +85,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.new_pin) {
             // Handle the camera action
+            NewPin newPin = new NewPin();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_container, newPin)
+                    .commit();
         } else if (id == R.id.load_pins) {
-            Toast.makeText(getApplicationContext(), "Loading the pins...", Toast.LENGTH_SHORT).show();
             LoadPinsFragment loadPinsFragment = new LoadPinsFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frag_container, loadPinsFragment)
