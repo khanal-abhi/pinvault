@@ -82,6 +82,7 @@ public class LoadPinsFragment extends Fragment {
             pinRecyclerView.setAdapter(new PinRecyclerView(mPinHelper.getPins(), R.layout.fragment_pin));
             pinRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             pinRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
         } catch (Exception e){
             e.printStackTrace();
         }
