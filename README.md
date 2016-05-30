@@ -31,3 +31,4 @@ The following public methods are exposed from the Pin Helper Class:
 #### Screenshots:
 <img src="img/screenshot1.png" width="200" />
 <img src="img/screenshot2.png" width="200" />
+<img src="img/screenshot3.png" width="200" />
