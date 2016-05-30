@@ -15,16 +15,17 @@ import android.widget.TextView;
 
 import co.khanal.pinvault.contracts.PinContract;
 import co.khanal.pinvault.helpers.PinHelper;
+import co.khanal.pinvault.interfaces.OnLoadDifferentFragmentListener;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LoadPinsFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link LoadPinsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoadPinsFragment extends Fragment {
+public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmentListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -79,7 +80,7 @@ public class LoadPinsFragment extends Fragment {
         try {
             Log.d(getClass().getSimpleName(), "Pins: " + mPinHelper.getPins().size());
             pinRecyclerView = (RecyclerView)view.findViewById(R.id.list);
-            pinRecyclerView.setAdapter(new PinRecyclerView(mPinHelper.getPins(), R.layout.fragment_pin));
+            pinRecyclerView.setAdapter(new PinRecyclerView(getContext(), mPinHelper.getPins(), R.layout.fragment_pin, this));
             pinRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             pinRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -111,6 +112,13 @@ public class LoadPinsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onLoadDifferentFragment(Fragment fragment) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frag_container, fragment)
+                .commit();
     }
 
     /**

@@ -1,5 +1,9 @@
 package co.khanal.pinvault;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +13,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import co.khanal.pinvault.contracts.PinContract;
+import co.khanal.pinvault.helpers.PinHelper;
+import co.khanal.pinvault.interfaces.OnLoadDifferentFragmentListener;
 import co.khanal.pinvault.pojos.Pin;
 
 /**
@@ -18,16 +25,20 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
 
     private List<Pin> pins;
     private int layout;
+    private Context mContext;
+    private OnLoadDifferentFragmentListener fragChangeListener;
 
-    public PinRecyclerView(List<Pin> pins, int layout){
+    public PinRecyclerView(Context mcontext, List<Pin> pins, int layout, OnLoadDifferentFragmentListener listener){
+        this.mContext = mcontext;
         this.pins = pins;
         this.layout = layout;
+        this.fragChangeListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(mContext, view, fragChangeListener);
     }
 
     @Override
@@ -50,13 +61,17 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
         public TextView label;
         public TextView password;
         private long _id;
+        private Context mContext;
+        private OnLoadDifferentFragmentListener fragChangeListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(Context mContext, View itemView, OnLoadDifferentFragmentListener listener) {
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-            label = (TextView)itemView.findViewById(R.id.label);
-            password = (TextView)itemView.findViewById(R.id.password);
+            this.mContext = mContext;
+            this.label = (TextView)itemView.findViewById(R.id.label);
+            this.password = (TextView)itemView.findViewById(R.id.password);
+            this.fragChangeListener = listener;
         }
 
         public void setPin(Pin pin){
@@ -68,11 +83,35 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
         @Override
         public void onClick(View v) {
             Log.d(getClass().getSimpleName(), "Click!");
+            PinHelper pinHelper = new PinHelper(mContext, PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
+            Pin pin;
+            try {
+                pin = pinHelper.getPin(_id);
+                NewPin newPin = new NewPin();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(PinContract.TABLE_NAME, pin);
+                newPin.setArguments(bundle);
+                fragChangeListener.onLoadDifferentFragment(newPin);
+
+            } catch (Exception e){
+                Log.e(getClass().getSimpleName(), e.getMessage());
+            }
+
         }
 
         @Override
         public boolean onLongClick(View v) {
-            Log.d(getClass().getSimpleName(), "Long Click");
+            Snackbar.make(v.getRootView(), "Delete data?", Snackbar.LENGTH_SHORT).setAction("DELETE", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PinHelper pinHelper = new PinHelper(mContext, PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
+                    try {
+                        pinHelper.removePin(_id);
+                    } catch (Exception e) {
+                        Log.e(getClass().getSimpleName(), e.getMessage());
+                    }
+                }
+            }).show();
             return true;
         }
     }
