@@ -87,11 +87,11 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
             Pin pin;
             try {
                 pin = pinHelper.getPin(_id);
-                NewPin newPin = new NewPin();
+                EditPin editPin = new EditPin();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(PinContract.TABLE_NAME, pin);
-                newPin.setArguments(bundle);
-                fragChangeListener.onLoadDifferentFragment(newPin);
+                editPin.setArguments(bundle);
+                fragChangeListener.onLoadDifferentFragment(editPin);
 
             } catch (Exception e){
                 Log.e(getClass().getSimpleName(), e.getMessage());

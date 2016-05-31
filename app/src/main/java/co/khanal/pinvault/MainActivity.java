@@ -17,7 +17,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NewPin.OnFragmentInteractionListener, LoadPinsFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        NewPin.OnFragmentInteractionListener,
+        LoadPinsFragment.OnFragmentInteractionListener,
+        EditPin.OnFragmentInteractionListener
+{
 
     public final static String NEW_PIN = "new_pin";
 
