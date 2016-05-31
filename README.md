@@ -25,7 +25,8 @@ The following public methods are exposed from the Pin Helper Class:
 
 ### Views:
 1. New Pin: Used to add a new pin. Already implemented. Will let a user add a pin provided the label and the pin have been set at the very least. The note is optional. There will be an option to discard the pin if the pin doesn't need to be saved.
-2. Load Pins: Is a recyclerview that lists all the pins and their passwords. More feature to be added soon.
+2. Load Pins: Is a recyclerview that lists all the pins and their passwords. A single click will go to the edit view which will let the user edit/display it. A long click will open up a snackbar with the option to confirm the delete as an action.
+3. Edit Pin: Is a fragment that lets the user edit an existing pin. The user may choose to persist the edit or discard it.
 
 
 #### Screenshots:
