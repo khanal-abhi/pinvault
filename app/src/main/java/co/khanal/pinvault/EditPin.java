@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import co.khanal.pinvault.contracts.PinContract;
+import co.khanal.pinvault.pojos.Pin;
 
 
 /**
@@ -28,6 +33,11 @@ public class EditPin extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private Pin mPin;
+
+    private EditText label_value, password_value, notes_value;
+    private Button save, discard;
 
     public EditPin() {
         // Required empty public constructor
@@ -57,6 +67,7 @@ public class EditPin extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mPin = getArguments().getParcelable(PinContract.TABLE_NAME);
         }
     }
 
@@ -64,7 +75,24 @@ public class EditPin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_pin, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_pin, container, false);
+
+        // EditTexts
+        label_value = (EditText)view.findViewById(R.id.name_value);
+        password_value = (EditText)view.findViewById(R.id.password_value);
+        notes_value = (EditText)view.findViewById(R.id.notes_value);
+
+        // Buttons
+        save = (Button)view.findViewById(R.id.save);
+        discard = (Button)view.findViewById(R.id.discard);
+
+        if(mPin != null){
+            label_value.setText(mPin.getLabel());
+            password_value.setText(mPin.getPin());
+            notes_value.setText(mPin.getNotes());
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
