@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import co.khanal.pinvault.contracts.PinContract;
+import co.khanal.pinvault.helpers.PinHelper;
 import co.khanal.pinvault.pojos.Pin;
 
 
@@ -27,6 +29,8 @@ public class EditPin extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    public static String TAG = "EDIT_PIN";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -91,6 +95,28 @@ public class EditPin extends Fragment {
             password_value.setText(mPin.getPin());
             notes_value.setText(mPin.getNotes());
         }
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Saving the pin", Toast.LENGTH_SHORT).show();
+                try {
+                    new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION).updatePin(mPin);
+                    Toast.makeText(getContext(), "Saved the pin...", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        discard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.frag_container, new LoadPinsFragment())
+                        .commit();
+            }
+        });
 
         return view;
     }

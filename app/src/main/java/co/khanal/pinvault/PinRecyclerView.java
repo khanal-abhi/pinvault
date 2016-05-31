@@ -91,7 +91,7 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(PinContract.TABLE_NAME, pin);
                 editPin.setArguments(bundle);
-                fragChangeListener.onLoadDifferentFragment(editPin);
+                fragChangeListener.onLoadDifferentFragment(editPin, editPin.TAG);
 
             } catch (Exception e){
                 Log.e(getClass().getSimpleName(), e.getMessage());

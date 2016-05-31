@@ -124,7 +124,7 @@ public class PinHelperTest extends AndroidTestCase {
             newPin.setNotes(pin2.getNotes());
             _id = mPinHelper.updatePin(newPin);
             Pin pin = mPinHelper.getPin(_id);
-            assertEquals(newPin, pin);
+            assertEquals(newPin.getNotes(), pin.getNotes());
         } catch (Exception e){
             assertTrue(e.getMessage(), false);
         }

@@ -7,5 +7,5 @@ import android.support.v4.app.Fragment;
  */
 public interface OnLoadDifferentFragmentListener {
 
-    void onLoadDifferentFragment(Fragment fragment);
+    void onLoadDifferentFragment(Fragment fragment, String Tag);
 }

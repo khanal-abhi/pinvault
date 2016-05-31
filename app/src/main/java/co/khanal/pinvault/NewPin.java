@@ -38,6 +38,8 @@ public class NewPin extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    public static String TAG = "NEW_PIN";
+
     EditText pinName;
     EditText pinPassword;
     EditText pinNotes;

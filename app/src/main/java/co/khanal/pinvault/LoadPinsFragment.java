@@ -31,6 +31,8 @@ public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmen
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    public static String TAG = "LOAD_PINS";
+
     private RecyclerView pinRecyclerView;
     PinHelper mPinHelper;
 
@@ -115,9 +117,9 @@ public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmen
     }
 
     @Override
-    public void onLoadDifferentFragment(Fragment fragment) {
+    public void onLoadDifferentFragment(Fragment fragment, String Tag) {
         getFragmentManager().beginTransaction()
-                .replace(R.id.frag_container, fragment)
+                .replace(R.id.frag_container, fragment, Tag)
                 .commit();
     }
 
