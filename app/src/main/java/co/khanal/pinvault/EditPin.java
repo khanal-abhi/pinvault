@@ -100,9 +100,16 @@ public class EditPin extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Saving the pin", Toast.LENGTH_SHORT).show();
+                Snackbar.make(getView(), "Updating pin ...", Snackbar.LENGTH_SHORT).show();
+                if(!(label_value.getText().toString()).isEmpty() &&
+                        !(password_value.getText().toString()).isEmpty()){
+                    mPin.setLabel(label_value.getText().toString());
+                    mPin.setPin(password_value.getText().toString());
+                    mPin.setNotes(notes_value.getText().toString());
+                }
+                PinHelper mPinHelper = new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
                 try {
-                    new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION).updatePin(mPin);
+                    mPinHelper.updatePin(mPin);
                     Snackbar.make(getView(), "Pin updated.", Snackbar.LENGTH_SHORT).show();
                     getFragmentManager().beginTransaction()
                             .replace(R.id.frag_container, new LoadPinsFragment())
