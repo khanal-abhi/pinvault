@@ -3,6 +3,7 @@ package co.khanal.pinvault;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,10 @@ public class EditPin extends Fragment {
                 Toast.makeText(getContext(), "Saving the pin", Toast.LENGTH_SHORT).show();
                 try {
                     new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION).updatePin(mPin);
-                    Toast.makeText(getContext(), "Saved the pin...", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "Pin updated.", Snackbar.LENGTH_SHORT).show();
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.frag_container, new LoadPinsFragment())
+                            .commit();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
