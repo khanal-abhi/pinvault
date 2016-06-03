@@ -121,7 +121,10 @@ public class NewPin extends Fragment {
                                 } catch (SQLException e) {
                                     e.printStackTrace();
                                 }
-                                Toast.makeText(getContext(), "Pin saved.", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(getView(), "Saved pin!", Snackbar.LENGTH_SHORT).show();
+                                getFragmentManager().beginTransaction()
+                                        .replace(R.id.frag_container, new LoadPinsFragment())
+                                        .commit();
 
                             } else {
                                 Toast.makeText(getContext(), "Name or Pin field empty. Cannot save.", Toast.LENGTH_SHORT).show();
