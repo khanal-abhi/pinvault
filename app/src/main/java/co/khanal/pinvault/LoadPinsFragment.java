@@ -89,6 +89,14 @@ public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmen
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        PinHelper mPinHelper = new PinHelper(getContext(), PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
+        if(mPinHelper.getMasterPin() == null){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frag_container, new MasterPin())
+                    .commit();
+        }
+
         return view;
     }
 

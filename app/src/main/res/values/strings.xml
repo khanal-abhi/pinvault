@@ -24,5 +24,7 @@
     <string name="save_pin">Save</string>
     <string name="discard_pin">Discard</string>
 
+    <string name="master_pib">Create Master Pin:</string>
+
 
 </resources>
