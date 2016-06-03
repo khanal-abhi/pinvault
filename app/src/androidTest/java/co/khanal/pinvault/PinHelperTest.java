@@ -143,6 +143,17 @@ public class PinHelperTest extends AndroidTestCase {
         }
     }
 
+    public void canGetMasterPin() throws Exception{
+        assertNull(mPinHelper.getMasterPin());
+        mPinHelper.insertPin(new Pin(PinContract.MASTER_PIN, "1234", null));
+        assertEquals(mPinHelper.getMasterPin().getPin(), "1234");
+    }
+
+    public void canSetMasterPin() throws Exception{
+        mPinHelper.setMasterPin("1234");
+        assertEquals(mPinHelper.getMasterPin().getPin(), "1234");
+    }
+
 
 
 

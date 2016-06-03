@@ -29,4 +29,6 @@ public class PinContract {
             NOTES_COLUMN
     };
 
+    public static String MASTER_PIN = "Def2@#@#$sf4f$@";
+
 }

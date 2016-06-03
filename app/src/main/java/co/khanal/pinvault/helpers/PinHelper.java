@@ -155,4 +155,44 @@ public class PinHelper extends SQLiteOpenHelper {
             return pin.get_id();
         else return res;
     }
+
+    public Pin getMasterPin(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(PinContract.TABLE_NAME,
+                PinContract.selection,
+                PinContract.LABEL_COLUMN + "=?",
+                new String[]{PinContract.MASTER_PIN},
+                null,
+                null,
+                null,
+                null);
+
+        Pin pin = new Pin();
+
+        if(cursor != null){
+            if(cursor.moveToFirst()){
+                pin.set_id(cursor.getLong(0));
+                pin.setLabel(cursor.getString(1));
+                pin.setPin(cursor.getString(2));
+                pin.setNotes(cursor.getString(3));
+
+                return pin;
+            }
+        }
+
+        return null;
+    }
+
+    public void setMasterPin(String password){
+        if(password == null){
+            throw new IllegalArgumentException("Cannot set the pin to null");
+        }
+
+        try {
+            Pin pin = new Pin(PinContract.MASTER_PIN, password, null);
+            insertPin(pin);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
