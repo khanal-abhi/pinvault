@@ -130,6 +130,19 @@ public class PinHelperTest extends AndroidTestCase {
         }
     }
 
+    public void testCanUpdatePin2() throws Exception{
+        try {
+            _id = mPinHelper.insertPin(pin1);
+            Pin newPin = mPinHelper.getPin(_id);
+            newPin.setNotes(pin2.getNotes());
+            _id = mPinHelper.updatePin(newPin);
+            Pin pin = mPinHelper.getPin(_id);
+            assertNotSame(pin.getNotes(), pin1.getNotes());
+        } catch (Exception e){
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
 
 
 
