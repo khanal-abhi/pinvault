@@ -92,15 +92,17 @@ public class PinHelper extends SQLiteOpenHelper {
 
     public List<Pin> getPins() throws SQLException{
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(
-                PinContract.TABLE_NAME,
+        String arg = PinContract.LABEL_COLUMN + "!=?";
+        String[] selection = {PinContract.MASTER_PIN};
+
+        Cursor cursor = db.query(PinContract.TABLE_NAME,
                 PinContract.selection,
+                arg,
+                selection,
                 null,
                 null,
-                null,
-                null,
-                null
-        );
+                null);
+
         List<Pin> pins = new ArrayList<Pin>();
 
         if(cursor.moveToFirst()){
