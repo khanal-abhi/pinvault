@@ -107,6 +107,7 @@ public class PinRecyclerView extends RecyclerView.Adapter<PinRecyclerView.ViewHo
                     PinHelper pinHelper = new PinHelper(mContext, PinContract.DATABASE_NAME, null, PinContract.DB_VERSION);
                     try {
                         pinHelper.removePin(_id);
+                        fragChangeListener.onLoadDifferentFragment(new LoadPinsFragment(), LoadPinsFragment.class.getSimpleName());
                     } catch (Exception e) {
                         Log.e(getClass().getSimpleName(), e.getMessage());
                     }
