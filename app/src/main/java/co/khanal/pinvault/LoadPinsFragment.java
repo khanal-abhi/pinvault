@@ -3,6 +3,7 @@ package co.khanal.pinvault;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,8 @@ public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmen
     private static final String ARG_PARAM2 = "param2";
 
     public static String TAG = "LOAD_PINS";
+
+    private FloatingActionButton fab;
 
     private RecyclerView pinRecyclerView;
     PinHelper mPinHelper;
@@ -79,6 +82,15 @@ public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_pin_list, container, false);
+        fab = (FloatingActionButton)view.findViewById(R.id.new_pin);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.frag_container, new NewPin())
+                        .commit();
+            }
+        });
         try {
             Log.d(getClass().getSimpleName(), "Pins: " + mPinHelper.getPins().size());
             pinRecyclerView = (RecyclerView)view.findViewById(R.id.list);
