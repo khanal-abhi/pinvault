@@ -107,6 +107,10 @@ public class LoadPinsFragment extends Fragment implements OnLoadDifferentFragmen
             getFragmentManager().beginTransaction()
                     .replace(R.id.frag_container, new MasterPin())
                     .commit();
+        } else {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frag_container, new MasterPin())
+                    .commit();
         }
 
         return view;
