@@ -25,6 +25,7 @@
     <string name="discard_pin">Discard</string>
 
     <string name="master_pib">Create Master Pin:</string>
+    <string name="title_activity_edit_master_pin">EditMasterPin</string>
 
 
 </resources>
